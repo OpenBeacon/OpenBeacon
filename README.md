@@ -57,14 +57,12 @@ stop information and the `msg` action could be a simple message that says "The
 actions such-as "transit-stop" which would directly list the upcoming routes
 that will be coming to that location.
 
-# Features
-## Packet Format
+# Packet Format
 
 * A defined message format, should include:
   - OpenBeacon Marker, 1 Octet, 0x0B
   - Reference RSII @ 1m, 1 Octets
   - URI, Up To 26 Octets (Must Contain At Least One '.' and One '/')
-
 
      0               1               2               3
      0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 
@@ -84,7 +82,7 @@ that will be coming to that location.
     |   URI (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-## Other things to consider:
+# Other things to consider:
 * Encode domain as UTF-8, then use a binary value as a path, base 64 encoded in
   HTTP for additional usable space.
   - '/' is used as terminator or use 4 bits for domain length minus 4.(min 4, 
