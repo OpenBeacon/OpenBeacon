@@ -100,10 +100,52 @@ type of `ADV_NONCONN_IND` (0010). The OpenBeacon message is sent as the
 # Extended Information Requests
 These are HTTP GET requests to the URI broadcast in the advertising packets.
 They will return a json object containing at a minimum a `actions` member whose
-value is a map containing `<weight>`: `<action>` pairs. `<weight>` is a
-numerical value with 0 being the highest weight. `<action>` is an is
-a pair consisting of the action name and action value where the action value is
-defined per action.
+value is an array of `<action>`s where the order defines the preference of
+execution. `<action>` is an is a pair consisting of the well-known action name
+and an action value where the action value is defined per action.
+
+    {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "OpenBeacon Extended Information Response",
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string"
+            },
+            "descriptor": {
+                "description": "A static description of the beacon or location.",
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "description": "Human readable description.",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "The well-known descriptor type.",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "The type-dependent object.",
+                        "type": "object"
+                    }
+                }
+            },
+            "actions": {
+                "description": "A prioritized list actions that may be taken.",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "description" : "Value defined by the well-known name."
+                }
+            },
+            "location": {
+                "description": "Coordinates of the beacon.",
+                "$ref": "http://json-schema.org/geo"
+            }
+        },
+        "required": ["name"]
+    }
+
 
 In the case that an application has registered the domain, the extended
 information request does not need to be performed directly and the URI should
