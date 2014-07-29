@@ -32,6 +32,40 @@ structured result that would then tell the device how to handle that data. It
 could also make a request to something like "mt.ocbn.io/.info" to get general
 information about that OpenBeacon Organization.
 
+# Features
+
+* A defined message format, should include:
+  - OpenBeacon Marker, 1 Octet, 0x0B
+  - Refrence RSII @ 1m, 1 Octets
+  - URI, Up To 26 Octets (Must Contain At Least One '.' and One '/')
+
+## Packet Format
+
+     0               1               2               3
+     0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |      0x0B     |    Ref RSSI   |               URI
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |   URI (Continued)
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |   URI (Continued)
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |   URI (Continued)
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |   URI (Continued)
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |   URI (Continued)
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |   URI (Continued)
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+## Other things to consider:
+* Encode domain as UTF-8, then use a binary value as a path, base 64 encoded in
+  HTTP for additional usable space.
+  - '/' is used as terminator or use 4 bits for domain length minus 4.(min 4, 
+    max 20).
+
+
 # Going Further
 Obviously this is from from a fully fleshed out spec, comments of all kinds are
 welcome. For now, use the github issues tab to submit suggestions, questions,
