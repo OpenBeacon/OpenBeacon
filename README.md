@@ -32,6 +32,25 @@ structured result that would then tell the device how to handle that data. It
 could also make a request to something like "mt.ocbn.io/.info" to get general
 information about that OpenBeacon Organization.
 
+    OpenBeacon     <BLE>             Client          <HTTPS>           Server
+      |                                 |                                 |
+      |-------------------------------->|                                 |
+      | 0x0B, -37, "mt.obcn.io/S17948"  |                                 |
+      |                                 |-------------------------------->|
+      |                                 |      GET mt.obcn.io/S17948      |
+      |                                 |                                 |
+      |                                 |<--------------------------------|
+      |                                 |         application/json        |
+      |                                 | {"location": "<loc>",           |
+      |                                 |  "actions":                     |
+      |                                 |   {0: { "href": "<URL>"},       |
+      |                                 |    5: { "msg": "<MSG>"}}}       |
+      |                                 |                                 |
+      |-------------------------------->|                                 |
+      | 0x0B, -37, "mt.obcn.io/S17948"  |                                 |
+      |                                 |     <Already Seen Recently>     |
+      |              ...                |           <No Action>           |
+
 # Features
 ## Packet Format
 
