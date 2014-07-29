@@ -61,7 +61,7 @@ that will be coming to that location.
 
 * A defined message format, should include:
   - OpenBeacon Marker, 1 Octet, 0x0B
-  - Reference RSII @ 1m, 1 Octets
+  - Reference RSSI @ 1m, 1 Octets
   - URI, Up To 26 Octets (Must Contain At Least One '.' and One '/')
 
 
