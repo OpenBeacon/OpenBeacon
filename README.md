@@ -64,6 +64,7 @@ that will be coming to that location.
   - Reference RSII @ 1m, 1 Octets
   - URI, Up To 26 Octets (Must Contain At Least One '.' and One '/')
 
+
      0               1               2               3
      0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
