@@ -146,6 +146,9 @@ and an action value where the action value is defined per action.
         "required": ["name"]
     }
 
+The response should include HTTP methods for cache control such as `Age`,
+`Cache-Control`, `Expires`, and/or those relating to entity tags. Clients
+should respect these headers when present.
 
 In the case that an application has registered the domain, the extended
 information request does not need to be performed directly and the URI should
@@ -155,6 +158,14 @@ be passed to the application.
 Beaconing has a high risk of abuse and the loss of user privacy should be
 considered throughly. More will be added to this section as the protocol is
 more fully fleshed-out.
+
+## Ideas for tackling privacy.
+
+* Requests must have an exact set of explicitly defined HTTP headers so that
+  there is no variation between clients.
+* All servers that service OpenBeacon requests must act as proxies to other
+  OpenBeacon servers. Then a server will only ever know your location or your
+  identity, but never both at the same time.
 
 # Going Further
 Obviously this is from from a fully fleshed out spec, comments of all kinds are
