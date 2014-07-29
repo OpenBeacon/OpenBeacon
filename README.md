@@ -1,7 +1,7 @@
 # OpenBeacon
 
 This documents does not define a protocol, but rather specifies some design
-goals for an open protcol for beaconing. It is inspired by the
+goals for an open protocol for beaconing. It is inspired by the
 [AltBeacon](http://altbeacon.org/) specification. I decided to make this because
 I don't think it goes far enough. In my opinion an open protocol like this
 should not depend on any one provider to provide a database of UUIDs.
@@ -62,7 +62,7 @@ that will be coming to that location.
 
 * A defined message format, should include:
   - OpenBeacon Marker, 1 Octet, 0x0B
-  - Refrence RSII @ 1m, 1 Octets
+  - Reference RSII @ 1m, 1 Octets
   - URI, Up To 26 Octets (Must Contain At Least One '.' and One '/')
 
 
