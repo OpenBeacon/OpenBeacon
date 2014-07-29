@@ -101,6 +101,11 @@ In the case that an application has registered the domain, the extended
 information request does not need to be performed directly and the URI should
 be passed to the application.
 
+# Security and Privacy Considerations
+Beaconing has a high risk of abuse and the loss of user privacy should be
+considered throughly. More will be added to this section as the protocol is
+more fully fleshed-out.
+
 # Going Further
 Obviously this is from from a fully fleshed out spec, comments of all kinds are
 welcome. For now, use the github issues tab to submit suggestions, questions,
