@@ -59,16 +59,24 @@ that will be coming to that location.
 
 # Packet Format
 
+The message format shown below is sent an a Bluetooth 4.1 Advertising PDU with a
+type of `ADV_NONCONN_IND` (0010). The OpenBeacon message is sent as the
+`AdvData` portion of the PDU payload.
+
 * A defined message format, should include:
   - OpenBeacon Marker, 1 Octet, 0x0B
   - Reference RSSI @ 1m, 1 Octets
-  - URI, Up To 26 Octets (Must Contain At Least One '.' and One '/')
+    - I'm not sure how useful this field will be for a heterogeneous mixture of
+      client devices. (Rather than just iPhone in iBeacon)
+  - URI, Up To 30 Octets (Must Contain At Least One '.' and One '/')
 
 
      0               1               2               3
      0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |      0x0B     |    Ref RSSI   |               URI
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |   URI (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |   URI (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
