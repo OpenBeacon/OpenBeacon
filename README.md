@@ -65,37 +65,28 @@ type of `ADV_NONCONN_IND` (0010). The OpenBeacon message is sent as the
 
 * A defined message format, should include:
   - OpenBeacon Marker, 1 Octet, 0x0B
-  - Reference RSSI @ 1m, 1 Octets
-    - I'm not sure how useful this field will be for a heterogeneous mixture of
-      client devices. (Rather than just iPhone in iBeacon)
-  - URI, Up To 30 Octets (Must Contain At Least One '.' and One '/')
+  - URI, Up To 26 Octets (Must Contain At Least One '.' and One '/')
 
 
      0               1               2               3
      0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |      0x0B     |    Ref RSSI   |               URI
+    |    Length     |    AD Type    |          MFG ID
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |   URI (Continued)
+    |     0x0B      |    URI 
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |   URI (Continued)
+        URI (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |   URI (Continued)
+        URI (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |   URI (Continued)
+        URI (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |   URI (Continued)
+        URI (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |   URI (Continued)
+        URI (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |   URI (Continued)
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-# Other things to consider:
-* Encode domain as UTF-8, then use a binary value as a path, base 64 encoded in
-  HTTP for additional usable space.
-  - '/' is used as terminator or use 4 bits for domain length minus 4.(min 4, 
-    max 20).
+        URI (Continued)                               |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 # Extended Information Requests
 These are HTTP GET requests to the URI broadcast in the advertising packets.
