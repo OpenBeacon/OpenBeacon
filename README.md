@@ -33,13 +33,13 @@ could also make a request to something like "mt.ocbn.io/.info" to get general
 information about that OpenBeacon Organization.
 
 # Features
+## Packet Format
 
 * A defined message format, should include:
   - OpenBeacon Marker, 1 Octet, 0x0B
   - Refrence RSII @ 1m, 1 Octets
   - URI, Up To 26 Octets (Must Contain At Least One '.' and One '/')
 
-## Packet Format
 
      0               1               2               3
      0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 
