@@ -51,6 +51,12 @@ information about that OpenBeacon Organization.
       |                                 |     <Already Seen Recently>     |
       |              ...                |           <No Action>           |
 
+In the given example, the `href` action would be a link to a webpage with live
+stop information and the `msg` action could be a simple message that says "The
+4L northbound will be here in 5 minutes.". Other action options could be defined
+actions such-as "transit-stop" which would directly list the upcoming routes
+that will be coming to that location.
+
 # Features
 ## Packet Format
 
