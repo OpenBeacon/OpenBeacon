@@ -89,6 +89,17 @@ that will be coming to that location.
   - '/' is used as terminator or use 4 bits for domain length minus 4.(min 4, 
     max 20).
 
+# Extended Information Requests
+These are HTTP GET requests to the URI broadcast in the advertising packets.
+They will return a json object containing at a minimum a `actions` member whose
+value is a map containing `<weight>`: `<action>` pairs. `<weight>` is a
+numerical value with 0 being the highest weight. `<action>` is an is
+a pair consisting of the action name and action value where the action value is
+defined per action.
+
+In the case that an application has registered the domain, the extended
+information request does not need to be performed directly and the URI should
+be passed to the application.
 
 # Going Further
 Obviously this is from from a fully fleshed out spec, comments of all kinds are
