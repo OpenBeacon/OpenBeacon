@@ -35,7 +35,7 @@ information about that OpenBeacon Organization.
     OpenBeacon     <BLE>             Client          <HTTPS>           Server
       |                                 |                                 |
       |-------------------------------->|                                 |
-      | 0x0B, -37, "mt.obcn.io/S17948"  |                                 |
+      |       "mt.obcn.io/S17948"       |                                 |
       |                                 |-------------------------------->|
       |                                 |      GET mt.obcn.io/S17948      |
       |                                 |                                 |
@@ -47,7 +47,7 @@ information about that OpenBeacon Organization.
       |                                 |    5: { "msg": "<MSG>"}}}       |
       |                                 |                                 |
       |-------------------------------->|                                 |
-      | 0x0B, -37, "mt.obcn.io/S17948"  |                                 |
+      |       "mt.obcn.io/S17948"       |                                 |
       |                                 |     <Already Seen Recently>     |
       |              ...                |           <No Action>           |
 
