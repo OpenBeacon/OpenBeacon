@@ -1,10 +1,11 @@
 # OpenBeacon
 
-This documents does not define a protocol, but rather specifies some design
-goals for an open protocol for beaconing. It is inspired by the
-[AltBeacon](http://altbeacon.org/) specification. I decided to make this because
-I don't think it goes far enough. In my opinion an open protocol like this
-should not depend on any one provider to provide a database of UUIDs.
+This document specifies some design goals and ideas for an open protocol for
+beaconing. It is inspired by the [AltBeacon](http://altbeacon.org/)
+specification. I decided to make this specification  because I don't think it
+AltBeacon goes far enough. In my opinion an open protocol like this
+should not depend on any one provider to provide a database of UUIDs and I think
+there are other valuable features that could be added.
 
 The AltBeacon specification says that "For interoperability purposes, the first
 16+ bytes of the beacon identifier should be unique to the advertiser's
@@ -16,7 +17,7 @@ keep this central database up and running?
 
 What we could really use is some sort of existing, fair system for identifying
 organizations and then allow them define their own id allocation within their
-organization identifier. How about domains and URIs?
+organization identifier. How about domains and URLs?
 
 Now we've got no central database that needs to be maintained and we
 automatically get a way to get more information about that beacon.
@@ -65,7 +66,7 @@ type of `ADV_NONCONN_IND` (0010). The OpenBeacon message is sent as the
 
 * A defined message format, should include:
   - OpenBeacon Marker, 1 Octet, 0x0B
-  - URI, Up To 26 Octets (Must Contain At Least One '.' and One '/')
+  - URL, Up To 26 Octets (Must Contain At Least One '.' and One '/')
 
 
      0               1               2               3
@@ -73,23 +74,23 @@ type of `ADV_NONCONN_IND` (0010). The OpenBeacon message is sent as the
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |    Length     |     0xFF      |    Company Identifier Code
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |     0x0B      |     URI 
+    |     0x0B      |     URL 
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-        URI (Continued)
+        URL (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-        URI (Continued)
+        URL (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-        URI (Continued)
+        URL (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-        URI (Continued)
+        URL (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-        URI (Continued)
+        URL (Continued)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-        URI (Continued)                               |
+        URL (Continued)                               |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 # Extended Information Requests
-These are HTTP GET requests to the URI broadcast in the advertising packets.
+These are HTTP GET requests to the URL broadcast in the advertising packets.
 They will return a json object containing at a minimum a `actions` member whose
 value is an array of `<action>`s where the order defines the preference of
 execution. `<action>` is an is a pair consisting of the well-known action name
@@ -142,7 +143,7 @@ The response should include HTTP methods for cache control such as `Age`,
 should respect these headers when present.
 
 In the case that an application has registered the domain, the extended
-information request does not need to be performed directly and the URI should
+information request does not need to be performed directly and the URL should
 be passed to the application.
 
 # Security and Privacy Considerations
@@ -157,6 +158,11 @@ more fully fleshed-out.
 * All servers that service OpenBeacon requests must act as proxies to other
   OpenBeacon servers. Then a server will only ever know your location or your
   identity, but never both at the same time.
+  - Problems:
+    * Can't just be an open proxy for obvious reasons. But if I want to have an
+      encrypted tunnel how can I prevent other protocol use? Restrict to a port
+      in a SRV record of the final host? That requires exposing the final host.
+      Maybe only allow very small TLS requests to a well-known port.
 
 # Going Further
 Obviously this is from from a fully fleshed out spec, comments of all kinds are
