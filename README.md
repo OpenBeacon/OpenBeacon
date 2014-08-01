@@ -133,6 +133,11 @@ and an action value where the action value is defined per action.
             "location": {
                 "description": "Coordinates of the beacon.",
                 "$ref": "http://json-schema.org/geo"
+            },
+            "map": {
+                "description": "Link to more info about the area and surrounding beacons in geojson.",
+                "type": "string",
+                "example": "https://moa.obcn.io/.geo"
             }
         },
         "required": ["name"]
