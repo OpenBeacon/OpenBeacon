@@ -181,6 +181,6 @@ the Bluetooth SIG, please get in touch with me.
   - Basically iBeacon with the trademarks crossed out.
 * [Physical Web](https://github.com/google/physical-web/)
   - Dev project from Google
-  - Requires having a trusted server to proxy requests. (Or giving up privacy.)
+  - Requires having a trusted server to proxy requests. (Or giving up privacy.) (Maybe, there's some discussion going on about how to handle this in their GH issues tracker.)
 
 To use an analogy, AltBeacon is logging in with Facebook, Physical Web is logging in with OpenID, and OpenBeacon is logging in with Persona.
