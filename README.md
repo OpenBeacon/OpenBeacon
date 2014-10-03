@@ -1,19 +1,17 @@
 # OpenBeacon
 
 This document specifies some design goals and ideas for an open protocol for
-beaconing. It is inspired by the [AltBeacon](http://altbeacon.org/)
-specification. I decided to make this specification  because I don't think it
-AltBeacon goes far enough. In my opinion an open protocol like this
-should not depend on any one provider to provide a database of UUIDs and I think
-there are other valuable features that could be added.
+beaconing. I decided to start defining this specification because I don't think
+protocols like AltBeacon don't do enough to make beaconing truly open. In my
+opinion an open protocol like this should not depend on any one provider to
+provide a database of UUIDs and I think there are other very valuable features
+that could be added without comprimising security or privacy.
 
-The AltBeacon specification says that "For interoperability purposes, the first
-16+ bytes of the beacon identifier should be unique to the advertiser's
-organizational unit.". But, who will assign that unique identifier and why
-should I trust them?
-
-AltBeacon says that won't charge any royalties or fees, but then who will pay to
-keep this central database up and running?
+Most existing beaconing protocols use an arbitrary UUID to identify a beacon,
+some sperateing it into an organization and individual ID. But this lacks
+discoverability without some certral database that assigns the organization ID
+and an interal database or known structure of the internal IDs. This doesn't
+seem like an ideal system to me.
 
 What we could really use is some sort of existing, fair system for identifying
 organizations and then allow them define their own id allocation within their
@@ -30,7 +28,7 @@ of when the next buses will be arriving at that stop.
 They could setup beacons that broadcast the beacon "mt.obcn.io/S17948". When the
 user's device sees this, it can make a request to that URL and get some
 structured result that would then tell the device how to handle that data. It
-could also make a request to something like "mt.ocbn.io/.info" to get general
+could also make a request to the base domain "mt.ocbn.io" to get general
 information about that OpenBeacon Organization.
 
     OpenBeacon     <BLE>             Client          <HTTPS>           Server
@@ -88,6 +86,51 @@ type of `ADV_NONCONN_IND` (0010). The OpenBeacon message is sent as the
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
         URL (Continued)                               |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    
+# General Information Requests
+This is the basic request that fetches general information about the
+organization which lets the user say whether they would like to let their device
+make requests to that domain. These requests will be made by the device only
+once per domain and must be cached until the user Accepts the domain. The TLS
+cert should be validated and any special features, such as an EV cert, should
+be noted in the UI and items should be sorted based on level of authentication.
+
+    {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "OpenBeacon Organization Information Response",
+        "type": "object",
+        "properties": {
+            "name": {
+                "description": "Name of Organization (Eg. Metro Transit, etc.)"
+                "type": "string"
+            },
+            "description": {
+                "description": "A human readable description of the organization.",
+                "type": "object",
+            },
+            "type": {
+                "description": "The well-known organization type.",
+                "type": "string"
+            },
+            "beacon-list": {
+                "description": "A list of beacons or beacon types.",
+                "type": "string",
+                "example": "https://moa.obcn.io/beacons
+            },
+            "map": {
+                "description": "Link to more info about the area in geojson.",
+                "type": "string",
+                "example": "https://moa.obcn.io/geo"
+            }
+        },
+        "required": ["name"]
+    }
+
+## Notes to Self
+May want to limit the size of the response since we're caching everything we see,
+may also want to let applicaions expire caches to prevent denial of service
+attacks on the deivce by broadcasting thousands of domains at once. But then this
+might start leaking more info than we want.
 
 # Extended Information Requests
 These are HTTP GET requests to the URL broadcast in the advertising packets.
@@ -153,22 +196,30 @@ be passed to the application.
 
 # Security and Privacy Considerations
 Beaconing has a high risk of abuse and the loss of user privacy should be
-considered throughly. More will be added to this section as the protocol is
-more fully fleshed-out.
+considered throughly.
 
-## Ideas for tackling privacy.
+## HTTP Headers
+Requests must have an exact set of explicitly defined HTTP headers so that
+there is no variation between clients. Beacon servers must must respond with
+a message format error if the headers differ.
 
-* Requests must have an exact set of explicitly defined HTTP headers so that
-  there is no variation between clients. Beacon servers must must respond with
-  and error in the headers differ.
-  - Note: 3xx response codes should be treated as a message format error, this
-    is to allow servers to redirect users hitting those URLs with a browser
-    to redirect to either an information page or the actual resource that
-    the beacon is representing.
-* The beacon domain must use a SRV record to point to the host that will handle
-  responding to the extended information request, proxies must not proxy to a
-  domain that does not provide a SRV record in the form
-  `_openbeacon._tcp.obcn.io. 86400 IN SRV 0 5 5060 serv.obcn.io.`
+A message format error is defined as either a 400 response code or any 3xx 
+response code. This is to allow servers to redirect users hitting those URLs
+with a browser to either an information page or the actual resource that
+the beacon is representing.
+
+## Proxied Requests
+All requests must be proxied through another beacon server. This also means
+that all beacon servers must act as a proxy to other beacon servers. This is a
+measure to prevent any single server from knowing both who you are (your IP)
+and where you are (the beacons that you see).
+
+The beacon domain must use a SRV record to point to the host that will handle
+responding to the extended information request, proxies must not proxy to a
+domain that does not provide a SRV record in the form
+ `_openbeacon._tcp.obcn.io. 86400 IN SRV 0 5 5060 serv.obcn.io.`
+
+
 * A device may not make requests to beacon URLs until the domain of the beacon
   has been approved by the user. The deivce may only make one request to the
   root (`/`) URI once and must cache the response so as to not ever need to
@@ -193,5 +244,3 @@ the Bluetooth SIG, please get in touch with me.
 * [Physical Web](https://github.com/google/physical-web/)
   - Dev project from Google
   - Requires having a trusted server to proxy requests. (Or giving up privacy.) (Maybe, there's some discussion going on about how to handle this in their GH issues tracker.)
-
-To use an analogy, AltBeacon is logging in with Facebook, Physical Web is logging in with OpenID, and OpenBeacon is logging in with Persona.
