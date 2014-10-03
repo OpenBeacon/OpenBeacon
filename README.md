@@ -167,7 +167,9 @@ more fully fleshed-out.
     * Can't just be an open proxy for obvious reasons. But if I want to have an
       encrypted tunnel how can I prevent other protocol use? Restrict to a port
       in a SRV record of the final host? That requires exposing the final host.
-      Maybe only allow very small TLS requests to a well-known port.
+      Maybe only allow very small TLS requests to a well-known port. Maybe port
+      48812, BEAC in hex. That way it would be trivial to filter a DDOS attack.
+      Is that really good enough though?
 
 # Going Further
 Obviously this is from from a fully fleshed out spec, comments of all kinds are
