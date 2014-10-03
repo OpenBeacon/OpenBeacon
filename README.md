@@ -176,5 +176,5 @@ and abuse.
 
 Another thing that would be nice, would be to not use the manufacturer specfic
 data type, since it's ideally not manufaturer specic and that would actually
-give us another two bytes to work with. If anyone has experiance working with
+give us another three bytes to work with. If anyone has experiance working with
 the Bluetooth SIG, please get in touch with me.
