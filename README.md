@@ -170,6 +170,12 @@ more fully fleshed-out.
       Maybe only allow very small TLS requests to a well-known port. Maybe port
       48812, BEAC in hex. That way it would be trivial to filter a DDOS attack.
       Is that really good enough though?
+    * I don't think letting the proxy know the domain is ideal because a
+      malicious beacon could put the identifier in the domain,
+      (sdf3rf.evil.io/junk). Then the proxy would know the excact location.
+      Is this acceptable since we're using random proxies? The likely hood that
+      the random proxy is colluding with the attacker is small. (Is it small
+      enough?)
 
 # Going Further
 Obviously this is from from a fully fleshed out spec, comments of all kinds are
