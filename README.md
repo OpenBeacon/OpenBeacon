@@ -161,6 +161,10 @@ more fully fleshed-out.
 * Requests must have an exact set of explicitly defined HTTP headers so that
   there is no variation between clients. Beacon servers must must respond with
   and error in the headers differ.
+  - Note: 3xx response codes should be treated as a message format error, this
+    is to allow servers to redirect users hitting those URLs with a browser
+    to redirect to either an information page or the actual resource that
+    the beacon is representing.
 * The beacon domain must use a SRV record to point to the host that will handle
   responding to the extended information request, proxies must not proxy to a
   domain that does not provide a SRV record in the form
