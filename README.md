@@ -159,23 +159,12 @@ more fully fleshed-out.
 ## Ideas for tackling privacy.
 
 * Requests must have an exact set of explicitly defined HTTP headers so that
-  there is no variation between clients.
-* All servers that service OpenBeacon requests must act as proxies to other
-  OpenBeacon servers. Then a server will only ever know your location or your
-  identity, but never both at the same time.
-  - Problems:
-    * Can't just be an open proxy for obvious reasons. But if I want to have an
-      encrypted tunnel how can I prevent other protocol use? Restrict to a port
-      in a SRV record of the final host? That requires exposing the final host.
-      Maybe only allow very small TLS requests to a well-known port. Maybe port
-      48812, BEAC in hex. That way it would be trivial to filter a DDOS attack.
-      Is that really good enough though?
-    * I don't think letting the proxy know the domain is ideal because a
-      malicious beacon could put the identifier in the domain,
-      (sdf3rf.evil.io/junk). Then the proxy would know the excact location.
-      Is this acceptable since we're using random proxies? The likely hood that
-      the random proxy is colluding with the attacker is small. (Is it small
-      enough?)
+  there is no variation between clients. Beacon servers must must respond with
+  and error in the headers differ.
+* The beacon domain must use a SRV record to point to the host that will handle
+  responding to the extended information request, proxies must not proxy to a
+  domain that does not provide a SRV record in the form
+  `_openbeacon._tcp.obcn.io. 86400 IN SRV 0 5 5060 serv.obcn.io.`
 
 # Going Further
 Obviously this is from from a fully fleshed out spec, comments of all kinds are
