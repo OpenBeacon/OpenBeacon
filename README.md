@@ -178,3 +178,12 @@ Another thing that would be nice, would be to not use the manufacturer specfic
 data type, since it's ideally not manufaturer specic and that would actually
 give us another three bytes to work with. If anyone has experiance working with
 the Bluetooth SIG, please get in touch with me.
+
+# Comparison with Other Options
+* [AltBeacon](http://altbeacon.org/)
+  - Basically iBeacon with the trademarks crossed out.
+* [Physical Web](https://github.com/google/physical-web/)
+  - Dev project from Google's Chrome Team
+  - Requires having a trusted server to proxy requests. (Or giving up privacy.)
+
+To use an analogy, AltBeacon is logging in with Facebook, Physical Web is logging in with OpenID, and OpenBeacon is logging in with Persona.
