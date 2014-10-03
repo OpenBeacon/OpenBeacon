@@ -191,7 +191,7 @@ the Bluetooth SIG, please get in touch with me.
 * [AltBeacon](http://altbeacon.org/)
   - Basically iBeacon with the trademarks crossed out.
 * [Physical Web](https://github.com/google/physical-web/)
-  - Dev project from Google's Chrome Team
+  - Dev project from Google
   - Requires having a trusted server to proxy requests. (Or giving up privacy.)
 
 To use an analogy, AltBeacon is logging in with Facebook, Physical Web is logging in with OpenID, and OpenBeacon is logging in with Persona.
