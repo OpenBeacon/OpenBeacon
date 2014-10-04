@@ -219,14 +219,16 @@ responding to the extended information request, proxies must not proxy to a
 domain that does not provide a SRV record in the form
  `_openbeacon._tcp.obcn.io. 86400 IN SRV 0 5 5060 serv.obcn.io.`
 
+# User Approval
 
-* A device may not make requests to beacon URLs until the domain of the beacon
-  has been approved by the user. The device may only make one request to the
-  root (`/`) URI once and must cache the response so as to not ever need to
-  make that request again.
-  - Also, the UI of the application should show the levels of trust based on
-    the cert. That is, if it's an EV cert, highlight it and show the company
-    info. May also want to show it higher in the list.
+A device may not make requests to beacon URLs until the domain of the beacon
+has been approved by the user. The device may only make one request to the
+root (`/`) URI once and must cache the response so as to not ever need to
+make that request again.
+
+Also, the UI of the application should show the levels of trust based on
+the cert. That is, if it's an EV cert, highlight it and show the company
+info. May also want to show it higher in the list.
 
 # Going Further
 Obviously this is from from a fully fleshed out spec, comments of all kinds are
