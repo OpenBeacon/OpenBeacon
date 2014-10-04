@@ -5,12 +5,12 @@ beaconing. I decided to start defining this specification because I think that
 protocols like AltBeacon don't do enough to make beaconing truly open. In my
 opinion an open protocol like this should not depend on any one provider to
 provide a database of UUIDs and I think there are other very valuable features
-that could be added without comprimising security or privacy.
+that could be added without compromising security or privacy.
 
 Most existing beaconing protocols use an arbitrary UUID to identify a beacon,
-some sperateing it into an organization and individual ID. But this lacks
-discoverability without some certral database that assigns the organization ID
-and an interal database or known structure of the internal IDs. This doesn't
+some separating it into an organization and individual ID. But this lacks
+discoverability without some central database that assigns the organization ID
+and an internal database or known structure of the internal IDs. This doesn't
 seem like an ideal system to me.
 
 What we could really use is some sort of existing, fair system for identifying
@@ -128,8 +128,8 @@ be noted in the UI and items should be sorted based on level of authentication.
 
 ## Notes to Self
 May want to limit the size of the response since we're caching everything we see,
-may also want to let applicaions expire caches to prevent denial of service
-attacks on the deivce by broadcasting thousands of domains at once. But then this
+may also want to let applications expire caches to prevent denial of service
+attacks on the device by broadcasting thousands of domains at once. But then this
 might start leaking more info than we want.
 
 # Extended Information Requests
@@ -221,21 +221,21 @@ domain that does not provide a SRV record in the form
 
 
 * A device may not make requests to beacon URLs until the domain of the beacon
-  has been approved by the user. The deivce may only make one request to the
+  has been approved by the user. The device may only make one request to the
   root (`/`) URI once and must cache the response so as to not ever need to
   make that request again.
   - Also, the UI of the application should show the levels of trust based on
-    the cert. That is, if it's an EV cert, hilight it and show the company info.
-    May also want to show it higher in the list.
+    the cert. That is, if it's an EV cert, highlight it and show the company
+    info. May also want to show it higher in the list.
 
 # Going Further
 Obviously this is from from a fully fleshed out spec, comments of all kinds are
 welcome. For now, use the github issues tab to submit suggestions, questions,
 and abuse.
 
-Another thing that would be nice, would be to not use the manufacturer specfic
-data type, since it's ideally not manufaturer specic and that would actually
-give us another three bytes to work with. If anyone has experiance working with
+Another thing that would be nice, would be to not use the manufacturer specific
+data type, since it's ideally not manufacturer specific and that would actually
+give us another three bytes to work with. If anyone has experience working with
 the Bluetooth SIG, please get in touch with me.
 
 # Comparison with Other Options
@@ -243,4 +243,6 @@ the Bluetooth SIG, please get in touch with me.
   - Basically iBeacon with the trademarks crossed out.
 * [Physical Web](https://github.com/google/physical-web/)
   - Dev project from Google
-  - Requires having a trusted server to proxy requests. (Or giving up privacy.) (Maybe, there's some discussion going on about how to handle this in their GH issues tracker.)
+  - Requires having a trusted server to proxy requests. (Or giving up privacy.)
+    (Maybe, there's some discussion going on about how to handle this in their
+    GH issues tracker.)
