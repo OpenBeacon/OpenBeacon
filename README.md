@@ -1,7 +1,7 @@
 # OpenBeacon
 
 This document specifies some design goals and ideas for an open protocol for
-beaconing. I decided to start defining this specification because I don't think
+beaconing. I decided to start defining this specification because I think that
 protocols like AltBeacon don't do enough to make beaconing truly open. In my
 opinion an open protocol like this should not depend on any one provider to
 provide a database of UUIDs and I think there are other very valuable features
